@@ -61,7 +61,6 @@ public class ManageScreen extends JPanel
                 String trimmedString = selectedItem.trim().substring(0, selectedItem.length() - 1);
                 System.out.println(trimmedString);
                 int year = Integer.parseInt(trimmedString);
-                System.out.println(year);
                 String chartType = "rock";
                 if (validYear(Utils.FIRST_YEAR_TOP_ROCK , Utils.LAST_YEAR_TOP_ROCK , year))
                 {
@@ -83,7 +82,6 @@ public class ManageScreen extends JPanel
                 String trimmedString = selectedItem.trim().substring(0, selectedItem.length() - 1);
                 System.out.println(trimmedString);
                 int year = Integer.parseInt(trimmedString);
-                System.out.println(year);
                 String chartType = "rnb";
                 if (validYear(Utils.FIRST_YEAR_TOP_RNB , Utils.LAST_YEAR_TOP_RNB , year))
                 {
@@ -105,7 +103,6 @@ public class ManageScreen extends JPanel
                 String trimmedString = selectedItem.trim().substring(0, selectedItem.length() - 1);
                 System.out.println(trimmedString);
                 int year = Integer.parseInt(trimmedString);
-                System.out.println(year);
                 String chartType = "brasil";
                 if (validYear(Utils.FIRST_YEAR_TOP_BRAZIL , Utils.LAST_YEAR_TOP_BRAZIL , year))
                 {
@@ -127,8 +124,6 @@ public class ManageScreen extends JPanel
                 String trimmedString = selectedItem.trim().substring(0, selectedItem.length() - 1);
                 System.out.println(trimmedString);
                 int year = Integer.parseInt(trimmedString);
-                System.out.println(year);
-
                 String chartType = "country";
                 if (validYear(Utils.FIRST_YEAR_TOP_COUNTRY , Utils.LAST_YEAR_TOP_COUNTRY , year))
                 {
@@ -150,7 +145,6 @@ public class ManageScreen extends JPanel
                 String trimmedString = selectedItem.trim().substring(0, selectedItem.length() - 1);
                 System.out.println(trimmedString);
                 int year = Integer.parseInt(trimmedString);
-                System.out.println(year);
                 String chartType = "top-100-songs";
                 showMessage(PlaybackValue(year , chartType , Utils.ARTIST_SEARCH ));
             }
@@ -173,22 +167,32 @@ public class ManageScreen extends JPanel
         List<ChartEntry> chartData = getChartData(year, chartType);
         if (type.equals(Utils.SONG_SEARCH))
         {
-         for (int i = 0; i < 10; i++)
+            for (ChartEntry entry : chartData)
+            {
+                String line = entry.getRank() + ": " + entry.getTitle() + "\n" ;
+                instructions.append(line);
+            }
+         /*for (int i = 0; i < 10; i++)
          {
             ChartEntry entry = chartData.get(i);
             String line = entry.getRank() + ": " + entry.getTitle() + "\n";
-            instructions.append(line);
-         }
+
+         }*/
 
         }
         else
         {
-            for (int i = 0; i < 10; i++)
+            for (ChartEntry entry : chartData)
             {
-                ChartEntry entry = chartData.get(i);
                 String line = entry.getRank() + ": " + entry.getArtist() + "\n";
                 instructions.append(line);
             }
+            /*for (int i = 0; i < 10; i++)
+            {
+                ChartEntry entry = chartData.get(i);
+
+                instructions.append(line);
+            }*/
 
         }
         instructionsString = instructions.toString();

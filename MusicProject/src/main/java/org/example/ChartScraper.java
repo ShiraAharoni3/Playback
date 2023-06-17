@@ -40,6 +40,7 @@ public class ChartScraper extends Thread
 
             // Initialize chart data list
             List<ChartEntry> chartData = new ArrayList<>();
+            int count = 0;
 
             // Iterate over rows and extract data
             for (WebElement row : rows) {
@@ -49,13 +50,17 @@ public class ChartScraper extends Thread
                     String title = columns.get(2).getText();
                     String artist = columns.get(1).getText();
                     chartData.add(new ChartEntry(rank, title, artist));
+                    count++;
+                    if (count == 10) {
+                        break; // Exit the loop after the first 15 elements
+                    }
                 }
             }
-            try {
+            /*try {
                 Thread.sleep(10000);
             }
             catch( Exception e ) {
-            }
+            }*/
 
             // Close the WebDriver
             driver.quit();
